@@ -393,6 +393,23 @@ export const lowerControlsStyles = css`
       position: static;
       min-height: calc(80 * var(--u));
     }
+    .product-detail .detail-screen:not(.lower-personal) {
+      min-height: calc(500 * var(--u));
+    }
+    .product-detail
+      .detail-screen:not(.lower-personal)
+      > .detail-actions {
+      margin-top: auto;
+    }
+    .product-detail:has(.detail-screen:not(.lower-personal) .temperature)
+      .detail-screen {
+      min-height: calc(790 * var(--u));
+    }
+    .product-detail:has(.detail-screen:not(.lower-personal) .temperature)
+      .detail-screen
+      > .detail-actions {
+      margin-top: auto;
+    }
     .product-detail .detail-actions button {
       font-size: calc(36 * var(--u));
     }
@@ -1161,112 +1178,56 @@ export const lowerControlsStyles = css`
     }
   }
 
-  /* 하단 조작의 고정색 선언이 공통 고대비 팔레트를 덮지 않도록 색상만 복원한다. */
-  &&&&&&[data-reach="true"][data-contrast="true"] {
-    .lower-controls-guide,
-    .catalog,
-    .pagination,
-    .lower-controls-preview,
-    .cart-preview,
-    .cart-scroll,
-    .order-bar,
-    .order-bar > div,
-    .product-detail,
-    .product-detail .detail-summary,
-    .product-detail .personal-choices {
-      background: var(--paper);
-      color: var(--ink);
-    }
-
-    .row-more,
-    .pagination button,
-    .preview-quantity button,
-    .order-bar .total-quantity button,
-    .lower-cart-actions button,
-    .reach-payment-navigation button,
-    .receipt-actions button {
-      background: var(--contrast-action);
-      color: var(--contrast-action-ink);
-      box-shadow: none;
-    }
-
-    .product {
-      background: var(--contrast-action);
-      color: var(--contrast-action-ink);
-      box-shadow: inset 0 0 0 var(--contrast-stroke) var(--contrast-black);
-    }
-    .product::after {
-      box-shadow: inset 0 0 0 max(1px, var(--u)) var(--contrast-black);
-    }
-
-    .pagination button:disabled,
-    .preview-quantity button:disabled,
-    .order-bar .total-quantity button:disabled,
-    .lower-cart-actions button:disabled,
-    .reach-payment-navigation button:disabled,
-    .receipt-actions button:disabled {
-      opacity: 1;
-      background: var(--contrast-disabled-bg);
-      color: var(--contrast-disabled-ink);
-      outline: 2px dashed var(--contrast-disabled-ink);
-      outline-offset: -2px;
-    }
-
-    .order-bar:not([data-lower-cart="true"]) {
-      border-color: var(--contrast-border);
-      box-shadow: inset 0 0 0 var(--contrast-stroke) var(--contrast-border);
-    }
-    &:not([data-large="true"])[data-screen="menu"]:has(
-        .catalog[data-lower-cart="true"]
-      ) {
-      .order-bar::before,
-      .cart-preview::before {
-        background: var(--paper);
+  /* 터치 위치 안내 + 하단 조작: 기존 레이아웃은 유지하고 말풍선 공간만 확보한다. */
+  &&&&&&[data-guidance="true"][data-reach="true"] {
+    &:not([data-large="true"])[data-screen="menu"] {
+      .lower-cart-actions .touch-guidance-target::before,
+      .lower-cart-actions .touch-guidance-target::after {
+        left: auto;
+        top: 50%;
+        bottom: auto;
       }
-      .order-bar,
-      .cart-preview,
-      .order-bar > div,
-      .cart-scroll {
-        background: var(--paper);
-        color: var(--ink);
+      .lower-cart-actions .touch-guidance-target::before {
+        right: calc(100% + 10 * var(--u));
+        width: max-content;
+        transform: translateY(-50%);
+        z-index: 2;
       }
-      .cart-row {
-        box-shadow: inset 0 calc(-1 * var(--u)) var(--contrast-border);
-      }
-      .cart-row[data-selected="true"] {
-        background: var(--contrast-selected);
-        color: var(--contrast-action-ink);
-      }
-      .cart-price {
-        color: inherit;
-      }
-      .lower-cart-actions button {
-        background: var(--contrast-action);
-        color: var(--contrast-action-ink);
-        box-shadow: none;
+      .lower-cart-actions .touch-guidance-target::after {
+        right: calc(100% - 1px);
+        width: calc(20 * var(--u));
+        height: calc(28 * var(--u));
+        transform: translateY(-50%);
+        border: 0;
+        background: var(--guide-color);
+        clip-path: polygon(0 0, 100% 50%, 0 100%);
+        z-index: 1;
       }
     }
 
-    .product-detail {
-      box-shadow: inset 0 0 0 var(--contrast-stroke) var(--contrast-border);
-    }
-    .product-detail::backdrop {
-      background: linear-gradient(
-        transparent calc((100dvh - 1920 * var(--u)) / 2 + 795 * var(--u)),
-        rgb(0 0 0 / 70%) 0
-      );
-    }
-    .product-detail .detail-totals .amount,
-    .product-detail .personal-summary .amount,
-    .product-detail .personal-summary .amount > span:last-child strong {
-      color: var(--ink);
+    &[data-screen="desserts"] {
+      .dessert-grid {
+        inset-block-end: calc(425 * var(--u));
+        overflow-y: auto;
+        overscroll-behavior-y: contain;
+        scrollbar-width: none;
+      }
+      .dessert-grid::-webkit-scrollbar {
+        display: none;
+      }
+      .more-menu {
+        inset-block-start: calc(700 * var(--u));
+      }
     }
 
-    .pagination,
-    .lower-controls-preview,
-    .cart-preview,
-    .cart-scroll {
-      border-color: var(--contrast-border);
+    &[data-screen="review"] {
+      .review-cart {
+        height: calc(490 * var(--u));
+      }
+      .review-total {
+        inset-block: auto calc(335 * var(--u));
+      }
     }
   }
+
 `;

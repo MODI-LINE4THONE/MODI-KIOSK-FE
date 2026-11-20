@@ -7,6 +7,8 @@ import CartRows from './CartRows.jsx'
 import Checkout from './Checkout.jsx'
 import { KioskFrame } from './styles.js'
 import { useTouchAssist } from './touchAssist.js'
+import { useTouchGuidance } from './touchGuidance.js'
+import { kioskGuidanceMessages } from './touchGuidanceConfig.js'
 import { useNfcInput } from '../../hooks/useNfcInput.js' // NFC 훅 임포트
 
 const START_PHOTO_MS = 5_000
@@ -152,6 +154,7 @@ export default function Kiosk() {
   const cartScroll = useRef(null)
   const frame = useRef(null)
   useTouchAssist(frame, profile.touch)
+  useTouchGuidance(frame, profile.guidance)
   const count = cart.reduce((sum, item) => sum + item.quantity, 0)
   const total = cart.reduce((sum, item) => sum + item.quantity * item.price, 0)
   const sections = Object.keys(catalog[category])
@@ -400,9 +403,13 @@ export default function Kiosk() {
                 {showLowerCart && <aside className="lower-cart-actions">
                   <button disabled={!cart.some(item => item.key === selectedCartKey)} onClick={() => { removeItem(selectedCartKey); setSelectedCartKey(null) }}>취소하기</button>
                   <button onClick={reset}>처음으로</button>
-                  <button disabled={!count} onClick={() => setScreen('desserts')}>주문하기</button>
+                  <button disabled={!count} data-guide={count > 0 || undefined}
+                    data-guide-label={kioskGuidanceMessages.submitOrder}
+                    onClick={() => setScreen('desserts')}>주문하기</button>
                 </aside>}
-                {!showLowerCart && <button disabled={!count} data-guide={count > 0 || undefined} data-guide-label="다 고르셨으면 눌러 주세요" onClick={() => setScreen('desserts')}>주문하기</button>}
+                {!showLowerCart && <button disabled={!count} data-guide={count > 0 || undefined}
+                  data-guide-label={kioskGuidanceMessages.submitOrder}
+                  onClick={() => setScreen('desserts')}>주문하기</button>}
               </footer>
             </>
           ) : (

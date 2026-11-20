@@ -1,4 +1,5 @@
-import { css } from 'styled-components'
+import { css } from "styled-components";
+import { highContrastTheme } from "./highContrastTheme.js";
 
 /*
  * 색상 고대비: 피그마 시안의 3색 체계
@@ -8,23 +9,8 @@ import { css } from 'styled-components'
  * 검정 배경 위의 일반 글자는 시안처럼 흰색
  */
 export const contrastStyles = css`
-  &&&[data-contrast='true'] {
-    --contrast-black: #191f28;
-    --contrast-yellow: #ffee00;
-    --contrast-blue: #00e1ff;
-
-    --ink: #fff;
-    --paper: var(--contrast-black);
-    --surface: var(--contrast-black);
-    --line: var(--contrast-yellow);
-    --accent: var(--contrast-yellow);
-    --contrast-action: var(--contrast-yellow); /* 누를 수 있는 버튼 (검정 글자 대비 약 15:1) */
-    --contrast-action-ink: var(--contrast-black);
-    --contrast-selected: var(--contrast-blue); /* 선택 상태 (검정 글자 대비 약 12:1) */
-    --contrast-border: var(--contrast-yellow);
-    --contrast-stroke: max(2px, calc(3 * var(--u)));
-    --contrast-disabled-ink: var(--contrast-yellow);
-    --contrast-disabled-bg: var(--contrast-black);
+  &&&[data-contrast="true"] {
+    ${highContrastTheme}
 
     background: var(--paper);
     color: var(--ink);
@@ -257,5 +243,109 @@ export const contrastStyles = css`
       outline: 4px solid var(--contrast-action-ink);
       outline-offset: calc(-4px - var(--contrast-stroke));
     }
+
+    /* 하단 조작은 배치만 담당하며, 조합 모드의 색상도 이 테마가 소유한다. */
+    &&&[data-reach="true"] {
+      .lower-controls-guide,
+      .catalog,
+      .pagination,
+      .lower-controls-preview,
+      .cart-preview,
+      .cart-scroll,
+      .order-bar,
+      .order-bar > div,
+      .product-detail,
+      .product-detail .detail-summary,
+      .product-detail .personal-choices {
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      .row-more,
+      .pagination button,
+      .preview-quantity button,
+      .order-bar .total-quantity button,
+      .lower-cart-actions button,
+      .reach-payment-navigation button,
+      .receipt-actions button {
+        background: var(--contrast-action);
+        color: var(--contrast-action-ink);
+        box-shadow: none;
+      }
+
+      .product {
+        background: var(--contrast-action);
+        color: var(--contrast-action-ink);
+        box-shadow: inset 0 0 0 var(--contrast-stroke) var(--contrast-black);
+      }
+      .product::after {
+        box-shadow: inset 0 0 0 max(1px, var(--u)) var(--contrast-black);
+      }
+
+      .pagination button:disabled,
+      .preview-quantity button:disabled,
+      .order-bar .total-quantity button:disabled,
+      .lower-cart-actions button:disabled,
+      .reach-payment-navigation button:disabled,
+      .receipt-actions button:disabled {
+        opacity: 1;
+        background: var(--contrast-disabled-bg);
+        color: var(--contrast-disabled-ink);
+        outline: 2px dashed var(--contrast-disabled-ink);
+        outline-offset: -2px;
+      }
+
+      .order-bar:not([data-lower-cart="true"]) {
+        border-color: var(--contrast-border);
+        box-shadow: inset 0 0 0 var(--contrast-stroke) var(--contrast-border);
+      }
+      &:not([data-large="true"])[data-screen="menu"]:has(
+          .catalog[data-lower-cart="true"]
+        ) {
+        .order-bar::before,
+        .cart-preview::before {
+          background: var(--paper);
+        }
+        .order-bar,
+        .cart-preview,
+        .order-bar > div,
+        .cart-scroll {
+          background: var(--paper);
+          color: var(--ink);
+        }
+        .cart-row {
+          box-shadow: inset 0 calc(-1 * var(--u)) var(--contrast-border);
+        }
+        .cart-row[data-selected="true"] {
+          background: var(--contrast-selected);
+          color: var(--contrast-action-ink);
+        }
+        .cart-price {
+          color: inherit;
+        }
+      }
+
+      .product-detail {
+        box-shadow: inset 0 0 0 var(--contrast-stroke) var(--contrast-border);
+      }
+      .product-detail::backdrop {
+        background: linear-gradient(
+          transparent calc((100dvh - 1920 * var(--u)) / 2 + 795 * var(--u)),
+          rgb(0 0 0 / 70%) 0
+        );
+      }
+      .product-detail .detail-totals .amount,
+      .product-detail .personal-summary .amount,
+      .product-detail .personal-summary .amount > span:last-child strong {
+        color: var(--ink);
+      }
+
+      .pagination,
+      .lower-controls-preview,
+      .cart-preview,
+      .cart-scroll {
+        border-color: var(--contrast-border);
+      }
+    }
   }
-`
+`;

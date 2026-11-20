@@ -33,9 +33,8 @@ export const largeTextStyles = css`
       background: inherit;
       font-size: calc(48 * var(--u)); font-weight: 400;
     }
-    .categories .row-more, .subcategories .row-more { background: white; }
-    &[data-contrast='true'] .categories .row-more { background: var(--paper); }
-    &[data-contrast='true'] .subcategories .row-more { background: var(--surface); }
+    .categories .row-more { background: var(--category-more-surface, white); }
+    .subcategories .row-more { background: var(--subcategory-more-surface, white); }
 
     /* 메뉴 목록: 한 줄 3개, 카드·이미지·글자 확대 */
     .product-grid {

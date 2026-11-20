@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { kioskImage, won } from './menu.js'
+import { kioskGuidanceMessages } from './touchGuidanceConfig.js'
 
 const personalGroups = [
   ['물', ['물 많이', '물 보통', '물 적게', '물 없이']],
@@ -95,7 +96,7 @@ export default function ProductOptions({ product, service, onClose, onAdd, lower
           <footer className="detail-actions">
             <button onClick={() => personalStep ? setPersonalStep(personalStep - 1) : setDraft(null)}>이전</button>
             {last
-              ? <button onClick={() => addItem(draft)}>퍼스널 옵션 저장</button>
+              ? <button data-guide data-guide-label={kioskGuidanceMessages.savePersonalOptions} onClick={() => addItem(draft)}>퍼스널 옵션 저장</button>
               : <button onClick={() => setPersonalStep(personalStep + 1)}>다음 옵션</button>}
           </footer>
         </div>
@@ -136,7 +137,7 @@ export default function ProductOptions({ product, service, onClose, onAdd, lower
           </div>
           <footer className="detail-actions">
             <button onClick={() => setDraft(null)}>이전</button>
-            <button data-guide data-guide-label="옵션을 다 고르셨으면 눌러 주세요" onClick={() => { setPersonal(draft); setDraft(null) }}>퍼스널옵션저장</button>
+            <button data-guide data-guide-label={kioskGuidanceMessages.savePersonalOptions} onClick={() => { setPersonal(draft); setDraft(null) }}>퍼스널옵션저장</button>
           </footer>
         </div>
       </dialog>
@@ -198,7 +199,7 @@ export default function ProductOptions({ product, service, onClose, onAdd, lower
         </div>
         <footer className="detail-actions">
           <button onClick={onClose}>주문 취소</button>
-          <button data-guide data-guide-label="장바구니에 담으려면 눌러 주세요"
+          <button data-guide data-guide-label={kioskGuidanceMessages.addToCart}
             onClick={() => {
               if (lowerReach && drink) {
                 setPersonalStep(0)
