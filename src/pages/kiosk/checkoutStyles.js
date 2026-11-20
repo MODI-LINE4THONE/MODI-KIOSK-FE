@@ -57,15 +57,17 @@ export const CheckoutLayout = styled.div`
   .dessert-quantity button span { position: relative; }
   .more-menu {
     position: absolute; top: calc(1502 * 100cqw / 1080); left: calc(40 * 100cqw / 1080);
-    width: calc(1001 * 100cqw / 1080); height: calc(160 * 100cqw / 1080); background: #f2f3e9;
+    width: calc(1001 * 100cqw / 1080); height: calc(160 * 100cqw / 1080); background: white;
     font-weight: 600; font-size: calc(40 * 100cqw / 1080);
   }
-  .more-menu span { color: var(--accent); }
+  .more-menu { color: #20352b; }
+  .more-menu span { color: #000; }
   .dessert-screen .dessert-actions {
     position: absolute; inset: auto 0 0; grid-template-columns: calc(340 * 100cqw / 1080) 1fr;
     gap: calc(16 * 100cqw / 1080); height: calc(160 * 100cqw / 1080);
   }
   .dessert-actions button { font-weight: 600; }
+  .dessert-screen .dessert-actions button + button { background: #000; color: #fff; }
 
   .review-screen { --u: calc(100cqw / 1080); position: relative; flex: 1; }
   .review-title {
@@ -74,7 +76,7 @@ export const CheckoutLayout = styled.div`
   }
   .cart-heading {
     position: absolute; inset: calc(193 * var(--u)) 0 auto; height: calc(76 * var(--u));
-    background: #f2f3e9; color: black; font-size: calc(40 * var(--u)); font-weight: 300; line-height: normal;
+    background: white; color: black; font-size: calc(40 * var(--u)); font-weight: 300; line-height: normal;
   }
   .cart-heading span { position: absolute; top: calc(14 * var(--u)); }
   .cart-heading span:nth-child(1) { left: calc(149 * var(--u)); }
@@ -104,7 +106,7 @@ export const CheckoutLayout = styled.div`
   .review-cart .quantity button span { position: relative; }
   .review-cart .cart-price { position: absolute; top: calc(43 * var(--u)); right: calc(.586 * var(--u)); gap: calc(14.12 * var(--u)); color: black; }
 
-  .snack-suggestions { position: absolute; inset: calc(1025 * var(--u)) 0 auto; height: calc(357 * var(--u)); background: #f2f3e9; }
+  .snack-suggestions { position: absolute; inset: calc(1025 * var(--u)) 0 auto; height: calc(357 * var(--u)); background: white; }
   .snack-suggestions h2 { position: absolute; top: calc(19 * var(--u)); left: calc(40 * var(--u)); font-size: calc(40 * var(--u)); font-weight: 400; line-height: normal; }
   .snack-suggestions > div {
     position: absolute; top: calc(96 * var(--u)); left: calc(40 * var(--u));
@@ -128,7 +130,7 @@ export const CheckoutLayout = styled.div`
   .review-total {
     position: absolute; inset: calc(1382 * var(--u)) 0 auto; height: calc(160 * var(--u));
     display: grid; grid-template-columns: calc(323 * var(--u)) calc(364 * var(--u)) 1fr;
-    align-items: center; background: var(--sage); color: var(--paper); font-size: calc(40 * var(--u)); font-weight: 600;
+    align-items: center; background: #000; color: white; font-size: calc(40 * var(--u)); font-weight: 600;
   }
   .review-total > strong { padding-left: calc(40 * var(--u)); }
   .review-total div { display: flex; justify-content: space-between; align-items: baseline; padding-right: calc(48 * var(--u)); }
@@ -140,19 +142,20 @@ export const CheckoutLayout = styled.div`
     grid-template-columns: calc(532 * var(--u)) 1fr; gap: calc(16 * var(--u));
   }
   .review-actions button { font-weight: 600; }
+  .review-screen .review-actions button + button { background: #000; }
 
   .payment-total {
     position: relative; flex: 0 0 calc(193 * var(--u)); display: flex; justify-content: space-between; align-items: flex-start;
     padding: calc(39 * var(--u)) calc(40 * var(--u)) 0; text-align: center; font-size: calc(40 * var(--u)); color: black;
   }
   .payment-total strong { display: block; font-weight: 600; }
-  .payment-total span:last-child { color: var(--accent); }
-  .payment-methods { position: relative; flex: 0 0 calc(1351 * var(--u)); background: #f2f3e9; }
+  .payment-total span:last-child { color: #717171; }
+  .payment-methods { position: relative; flex: 0 0 calc(1351 * var(--u)); background: white; }
   .payment-methods h1 { position: absolute; inset: calc(74 * var(--u)) 0 auto; text-align: center; font-size: calc(50 * var(--u)); font-weight: 600; }
   .payment-grid button {
     position: absolute; display: flex; align-items: center; justify-content: center; flex-direction: column;
     width: calc(532 * var(--u)); height: calc(250 * var(--u)); box-shadow: inset 0 0 0 var(--u) #020352ba;
-    background: var(--paper); font-weight: 500; font-size: calc(40 * var(--u)); line-height: normal;
+    background: white; font-weight: 500; font-size: calc(40 * var(--u)); line-height: normal;
   }
   .payment-grid button small { display: block; font-weight: 400; font-size: calc(28 * var(--u)); }
   .payment-grid .wide { width: 100%; flex-direction: row; }
@@ -176,7 +179,7 @@ export const CheckoutLayout = styled.div`
   .card-title { position: relative; height: calc(315 * var(--u)); text-align: center; }
   .card-title h1 { position: absolute; inset: calc(58 * var(--u)) 0 auto; font-size: calc(50 * var(--u)); font-weight: 600; line-height: normal; }
   .card-title p { position: absolute; inset: calc(127 * var(--u)) 0 auto; font-size: calc(40 * var(--u)); line-height: calc(56 * var(--u)); }
-  .card-instructions { position: relative; height: calc(1351 * var(--u)); background: #f2f3e9; text-align: center; }
+  .card-instructions { position: relative; height: calc(1351 * var(--u)); background: white; text-align: center; }
   .card-instructions > p:not(.order-warning) { position: absolute; inset: calc(607 * var(--u)) 0 auto; font-size: calc(50 * var(--u)); line-height: normal; white-space: nowrap; }
   .card-instructions .order-warning { inset: calc(1159 * var(--u)) 0 auto; }
   .card-payment > .detail-actions { position: absolute; inset: auto 0 0; height: calc(160 * var(--u)); }
@@ -184,7 +187,7 @@ export const CheckoutLayout = styled.div`
   .payment-overlay { position: absolute; inset: calc(-78 * var(--u)) 0 0; background: rgb(32 53 43 / 30%); }
   .payment-notice {
     position: absolute; left: calc(257 * var(--u)); top: calc(681 * var(--u)); width: calc(565 * var(--u)); height: calc(638 * var(--u));
-    box-shadow: inset 0 0 0 calc(100cqw / 1080) var(--ink); background: var(--paper); color: black; text-align: center; line-height: normal;
+    box-shadow: inset 0 0 0 calc(100cqw / 1080) var(--ink); background: white; color: black; text-align: center; line-height: normal;
   }
   .payment-notice h2 {
     position: absolute; inset: calc(82 * var(--u)) 0 auto;
@@ -202,8 +205,9 @@ export const CheckoutLayout = styled.div`
   .complete-message > p:not(.order-warning) { position: absolute; inset: calc(793 * var(--u)) 0 auto; }
   .order-warning {
     position: absolute; inset: calc(1352 * var(--u)) 0 auto; display: flex; align-items: center; justify-content: center;
-    gap: calc(8 * var(--u)); color: var(--ink); font-size: calc(50 * var(--u));
+    gap: calc(8 * var(--u)); color: #20352b; font-size: calc(50 * var(--u));
   }
   .order-warning img { width: 5.2cqw; height: auto; }
   .detail-actions.receipt-actions { grid-template-columns: calc(394 * var(--u)) 1fr; }
+  .detail-actions.receipt-actions button + button { background: #000000; }
 `

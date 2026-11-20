@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://modi.kang0131.shop/api/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
